@@ -6,3 +6,5 @@ const d = document
 d.addEventListener('DOMContentLoaded', e => {
   App()
 })
+
+window.addEventListener('hashchange', App )
