@@ -1,6 +1,7 @@
 import api from "../helpers/wp_api.js";
 import { ajax } from "../helpers/ajax.js";
 import { PostCards } from "./Post-card.js";
+import { Post } from "./Post.js";
 
 export async function Router() {
   const d = document,
@@ -21,6 +22,7 @@ export async function Router() {
       url: api.POSTS,
       cbSuccess: (post) => {
         let html = "";
+        console.log(post)
         post.forEach((el) => (html += PostCards(el)));
         // d.querySelector(".loader").style.display = "none";
         $main.innerHTML = html;
@@ -31,10 +33,19 @@ export async function Router() {
   } else if (hash === "#/contact") {
     $main.innerHTML = `<h2> Contact Section </h2>`;
   } else{
-    $main.innerHTML = `<h2> Content will be loaded here </h2>`;
+    await ajax({
+      url: `${api.POST}/${localStorage.getItem('wpPostId')}`,
+      cbSuccess: (post) => {
+        console.log(post)
+        
+        $main.innerHTML = Post(post)
+      }
+    })
+    
+  
+   
 
   }
-
   d.querySelector(".loader").style.display = "none";
-
+  
 }
