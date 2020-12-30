@@ -5,6 +5,7 @@ import { Main } from "./components/Main.js";
 import { PostCards } from "./components/Post-card.js";
 import { Loader } from "./components/Loader.js";
 import { Router } from "./components/Router.js";
+import { infiniteScroll } from "./helpers/infinite_scroll.js";
 
 export function App() {
   const $root = document.getElementById("root");
@@ -13,7 +14,9 @@ export function App() {
   $root.appendChild(Header());
   $root.appendChild(Main());
   $root.appendChild(Loader());
+  
 
   
   Router();
+  infiniteScroll()
 }
